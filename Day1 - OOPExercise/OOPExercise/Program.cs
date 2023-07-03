@@ -12,8 +12,11 @@ Fish fish = new Fish(true);                                     //Animal
 
 try
 {
+    Console.WriteLine("Input protein count for algae: ");
     int proteinCount = Int32.Parse(Console.ReadLine());
+    Console.WriteLine("Input fat count for algae: ");
     int fatCount = Int32.Parse(Console.ReadLine());
+    Console.WriteLine("Input omega3 oil count for algae: ");
     int omegaOilCount = Int32.Parse(Console.ReadLine());
     Algae algae = new Algae(proteinCount, fatCount, omegaOilCount);
     fish.Eat(algae);
