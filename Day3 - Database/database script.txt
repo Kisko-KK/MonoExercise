@@ -1,0 +1,153 @@
+create table Movie(
+	Id uuid primary key,
+	Name text not NULL,
+	Duration Int not NULL,
+	Score float
+);
+
+create table Hall(
+	Id uuid primary key,
+	Name text not NULL,
+	NumOfSeats Int
+);
+
+create table Screening(
+	Id uuid primary key,
+	MovieId uuid not NULL,
+	HallId uuid not NULL,
+	StartTime TIMESTAMP,
+	
+	CONSTRAINT FK_Screening_Movie_MovieId FOREIGN KEY (MovieId) references Movie(Id),
+	CONSTRAINT FK_Screening_Hall_HallId FOREIGN KEY (HallId) REFERENCES Hall(Id)
+);
+
+create table Userr(
+	Id uuid primary key,
+	Name VARCHAR(20),
+	LastName VARCHAR(20)
+);
+
+create table Reservation(
+	Id uuid primary key,
+	ScreeningId uuid,
+	UserId uuid,
+	
+	CONSTRAINT FK_Reservation_Screening_ScreeningId FOREIGN KEY (ScreeningId) references Screening(Id),
+	CONSTRAINT FK_Reservation_Userr_UserId FOREIGN KEY (UserId) REFERENCES Userr(Id)
+);
+ALTER TABLE Reservation
+ALTER COLUMN ScreeningId SET NOT NULL;
+ALTER TABLE Reservation
+ALTER COLUMN UserId SET NOT NULL;
+
+create table Seat(
+	Id uuid primary key,
+	ReservationId uuid not null,
+	IsVip boolean not null,
+	
+	CONSTRAINT FK_Seat_Reservation_ReservationId FOREIGN KEY (ReservationId) references Reservation(Id)
+);
+
+
+create table Receipt(
+	Id uuid primary key,
+	UserId uuid not null,
+	Price float not null,
+	
+	CONSTRAINT FK_Receipt_Reservation_Id FOREIGN KEY (Id) references Reservation(Id),
+	CONSTRAINT FK_Receipt_Userr_UserId FOREIGN KEY (UserId) REFERENCES Userr(Id)
+);
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+--d892da12-1b15-11ee-9228-6315b5d0a2a7
+--fedbcf58-1b15-11ee-9229-7f2ddf238697
+INSERT INTO public.movie
+(id, "name", duration, score)
+VALUES(uuid_generate_v1(), 'Dobar', 100, 3.6);
+INSERT INTO public.movie
+(id, "name", duration, score)
+VALUES(uuid_generate_v1(), 'Film', 120, 3.8);
+
+--6dc38d48-1b20-11ee-922d-13e0090f225c
+--6dc3cb64-1b20-11ee-922e-b34054e72165
+INSERT INTO public.hall
+(id, "name", numofseats)
+VALUES(uuid_generate_v1(), 'XXExtreme', 100);
+INSERT INTO public.hall
+(id, "name", numofseats)
+VALUES(uuid_generate_v1(), 'XXExtreme2', 200);
+
+--0145010a-1b21-11ee-922f-a378de377026
+INSERT INTO public.screening
+(id, movieid, hallid, starttime)
+VALUES(uuid_generate_v1(),'d892da12-1b15-11ee-9228-6315b5d0a2a7' ,'6dc38d48-1b20-11ee-922d-13e0090f225c' , '2023-07-05 12:30:00');
+
+--cdc32800-1b22-11ee-9230-bf88d6323f60
+--cdc38340-1b22-11ee-9231-a7dbdf5941c3
+INSERT INTO public.userr
+(id, "name", lastname)
+VALUES(uuid_generate_v1(), 'Marin', 'Kovalisko');
+INSERT INTO public.userr
+(id, "name", lastname)
+VALUES(uuid_generate_v1(), 'Rober', 'Knežević');
+
+--38a87288-1b23-11ee-9232-afb4d83a64c2
+--38a8abae-1b23-11ee-9233-d3baeda92457
+INSERT INTO public.reservation
+(id, screeningid, userid)
+VALUES(uuid_generate_v1(), '0145010a-1b21-11ee-922f-a378de377026', 'cdc32800-1b22-11ee-9230-bf88d6323f60');
+INSERT INTO public.reservation
+(id, screeningid, userid)
+VALUES(uuid_generate_v1(), '0145010a-1b21-11ee-922f-a378de377026', 'cdc38340-1b22-11ee-9231-a7dbdf5941c3');
+
+
+INSERT INTO public.receipt
+(id, userid, price)
+VALUES('38a87288-1b23-11ee-9232-afb4d83a64c2','cdc32800-1b22-11ee-9230-bf88d6323f60' , 120);
+INSERT INTO public.receipt
+(id, userid, price)
+VALUES('38a8abae-1b23-11ee-9233-d3baeda92457','cdc38340-1b22-11ee-9231-a7dbdf5941c3' , 50);
+
+
+INSERT INTO public.seat
+(id, reservationid, isvip)
+VALUES(uuid_generate_v1(), '38a87288-1b23-11ee-9232-afb4d83a64c2', false);
+INSERT INTO public.seat
+(id, reservationid, isvip)
+VALUES(uuid_generate_v1(), '38a8abae-1b23-11ee-9233-d3baeda92457', true);
+
+
+SELECT Movie.Name, Hall.Name, Screening.StartTime
+FROM Screening
+INNER JOIN Movie ON Screening.MovieId = Movie.Id
+INNER JOIN Hall ON Screening.HallId = Hall.Id;
+
+SELECT Reservation.Id, Userr.Name, Userr.LastName
+FROM Reservation
+LEFT JOIN Userr ON Reservation.UserId = Userr.Id;
+
+SELECT Receipt.Id, Reservation.ScreeningId, Reservation.UserId
+FROM Receipt
+RIGHT JOIN Reservation ON Receipt.Id = Reservation.Id;
+
+SELECT Seat.Id, Reservation.Id
+FROM Seat
+FULL JOIN Reservation ON Seat.ReservationId = Reservation.Id;
+
+SELECT Screening.Id, movieid, hallid, starttime, name, numofseats
+FROM public.screening, public.Hall
+where HallId = Hall.Id;
+
+select *
+from hall
+where numofseats >99;
+
+UPDATE public.userr
+SET "name"='Robert'
+WHERE id='cdc38340-1b22-11ee-9231-a7dbdf5941c3';
+
+
+DELETE FROM public.seat
+WHERE id='5c553972-1b24-11ee-9237-036b96d07c21';
+
+
