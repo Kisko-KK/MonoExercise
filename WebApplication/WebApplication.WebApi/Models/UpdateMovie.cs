@@ -7,6 +7,8 @@ namespace WebApplication.WebApi.Models
 {
     public class UpdateMovie
     {
-        public double Score { get; set; } 
+        public string Name { get; set; }
+        public TimeSpan Duration { get; set; }
+        public float Score { get; set; }
     }
 }
