@@ -1,0 +1,6 @@
+C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Service.Common\bin\Debug\WebApplication.Service.Common.dll
+C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Service.Common\bin\Debug\WebApplication.Service.Common.pdb
+C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Service.Common\obj\Debug\WebApplication.Service.Common.csproj.AssemblyReference.cache
+C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Service.Common\obj\Debug\WebApplication.Service.Common.csproj.CoreCompileInputs.cache
+C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Service.Common\obj\Debug\WebApplication.Service.Common.dll
+C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Service.Common\obj\Debug\WebApplication.Service.Common.pdb
