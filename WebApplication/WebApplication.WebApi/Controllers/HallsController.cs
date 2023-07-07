@@ -5,6 +5,7 @@ using System.Web.Http;
 using WebApplication.Model;
 using WebApplication.Service;
 using WebApplication.WebApi.Models;
+using System.Threading.Tasks;
 
 namespace WebApplication.WebApi.Controllers
 {
@@ -13,15 +14,15 @@ namespace WebApplication.WebApi.Controllers
         private HallsService hallsService = new HallsService();
 
         // GET api/halls
-        public HttpResponseMessage Get()
+        public async Task<HttpResponseMessage> Get()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, hallsService.Get());
+            return Request.CreateResponse(HttpStatusCode.OK,await hallsService.GetAsync());
         }
 
         // GET api/halls/5
-        public HttpResponseMessage Get(Guid id)
+        public async Task<HttpResponseMessage> Get(Guid id)
         {
-            Hall hall = hallsService.Get(id);
+            Hall hall = await hallsService.GetAsync(id);
 
             if (hall == null)
             {
@@ -31,7 +32,7 @@ namespace WebApplication.WebApi.Controllers
         }
 
         // POST api/<controller>
-        public HttpResponseMessage Post([FromBody] UpdateHall updatedHall)
+        public async Task<HttpResponseMessage> Post([FromBody] UpdateHall updatedHall)
         {
             Guid id = Guid.NewGuid();
             Hall hall = new Hall();
@@ -39,7 +40,7 @@ namespace WebApplication.WebApi.Controllers
             hall.Name = updatedHall.Name;
             hall.NumOfSeats = (int)updatedHall.NumOfSeats;
 
-            int rowsAffected = hallsService.Post(hall);
+            int rowsAffected = await hallsService.PostAsync(hall);
 
             if (rowsAffected <= 0)
             {
@@ -49,12 +50,12 @@ namespace WebApplication.WebApi.Controllers
         }
 
         // PUT api/<controller>/5
-        public HttpResponseMessage Put(Guid id, [FromBody] UpdateHall updatedHall)
+        public async Task<HttpResponseMessage> Put(Guid id, [FromBody] UpdateHall updatedHall)
         {
 
             Hall hall = new Hall(id, updatedHall.Name, (int)updatedHall.NumOfSeats);
 
-            int rowsAffected = hallsService.Put(id, hall);
+            int rowsAffected = await hallsService.PutAsync(id, hall);
 
             if (rowsAffected == -2)
             {
@@ -74,9 +75,9 @@ namespace WebApplication.WebApi.Controllers
         }
 
         // DELETE api/<controller>/5
-        public HttpResponseMessage Delete(Guid id)
+        public async Task<HttpResponseMessage> Delete(Guid id)
         {
-            int rowsAffected = hallsService.Delete(id);
+            int rowsAffected = await hallsService.DeleteAsync(id);
 
             if(rowsAffected == -2)
             {

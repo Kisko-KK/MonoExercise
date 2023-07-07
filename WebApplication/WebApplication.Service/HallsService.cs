@@ -12,27 +12,27 @@ namespace WebApplication.Service
     public class HallsService : IHallService
     {
         private HallsRepository hallsRepository = new HallsRepository();
-        public List<Hall> Get()
+        public async Task<List<Hall>> GetAsync()
         {
-            return hallsRepository.Get();
+            return await hallsRepository.GetAsync();
         }
 
-        public Hall Get(Guid id) {
-            return hallsRepository.Get(id);
+        public async Task<Hall> GetAsync(Guid id) {
+            return await hallsRepository.GetAsync(id);
         }
 
-        public int Post(Hall hall)
+        public async Task<int> PostAsync(Hall hall)
         {
-            return hallsRepository.Post(hall);
+            return await hallsRepository.PostAsync(hall);
         }
 
-        public int Put(Guid id, Hall hall) { 
-            return hallsRepository.Put(id, hall);
+        public async Task<int> PutAsync(Guid id, Hall hall) { 
+            return await hallsRepository.PutAsync(id, hall);
         }
 
-        public int Delete(Guid id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            return hallsRepository.Delete(id);
+            return await hallsRepository.DeleteAsync(id);
         }
     }
 }

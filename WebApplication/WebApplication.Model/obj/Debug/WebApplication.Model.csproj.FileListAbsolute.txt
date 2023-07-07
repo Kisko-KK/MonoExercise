@@ -4,3 +4,12 @@ C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Model\obj\De
 C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Model\obj\Debug\WebApplication.Model.csproj.CoreCompileInputs.cache
 C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Model\obj\Debug\WebApplication.Model.dll
 C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Model\obj\Debug\WebApplication.Model.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\bin\Debug\WebApplication.Model.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\bin\Debug\WebApplication.Model.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\bin\Debug\WebApplication.Model.Common.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\bin\Debug\WebApplication.Model.Common.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\obj\Debug\WebApplication.Model.csproj.AssemblyReference.cache
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\obj\Debug\WebApplication.Model.csproj.CoreCompileInputs.cache
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\obj\Debug\WebApplication.Model.csproj.CopyComplete
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\obj\Debug\WebApplication.Model.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Model\obj\Debug\WebApplication.Model.pdb

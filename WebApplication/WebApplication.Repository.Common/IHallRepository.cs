@@ -9,10 +9,10 @@ namespace WebApplication.Repository.Common
 {
     public interface IHallRepository
     {
-        List<Hall> Get();
-        Hall Get(Guid id);
-        int Post(Hall hall);
-        int Put(Guid id, Hall hall);
-        int Delete(Guid id);
+        Task<List<Hall>> GetAsync();
+        Task<Hall> GetAsync(Guid id);
+        Task<int> PostAsync(Hall hall);
+        Task<int> PutAsync(Guid id, Hall hall);
+        Task<int> DeleteAsync(Guid id);
     }
 }

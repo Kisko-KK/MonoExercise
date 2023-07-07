@@ -16,7 +16,7 @@ namespace WebApplication.Repository
     {
         private string connectionString = ConnectionUtilities.ConnectionString;
 
-        public List<Hall> Get()
+        public async Task<List<Hall>> GetAsync()
         {
             List<Hall> halls = new List<Hall>();
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -24,7 +24,7 @@ namespace WebApplication.Repository
                 connection.Open();
 
                 NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM hall", connection);
-                NpgsqlDataReader reader = command.ExecuteReader();
+                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
 
                 while (reader.Read())
                 {
@@ -41,13 +41,13 @@ namespace WebApplication.Repository
         }
 
 
-        public Hall Get(Guid id)
+        public async Task<Hall> GetAsync(Guid id)
         {
-            return GetHall(id);
+            return await GetHallAsync(id);
         }
 
 
-        public int Post(Hall hall)
+        public async Task<int> PostAsync(Hall hall)
         {
 
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
@@ -61,16 +61,16 @@ namespace WebApplication.Repository
                 command.Parameters.AddWithValue("name", hall.Name);
                 command.Parameters.AddWithValue("numOfSeats", hall.NumOfSeats);
 
-                int rowsAffected = command.ExecuteNonQuery();
+                int rowsAffected = await command.ExecuteNonQueryAsync();
 
                 return rowsAffected;
             }
 
         }
 
-        public int Put(Guid id, Hall hall)
+        public async Task<int> PutAsync(Guid id, Hall hall)
         {
-            Hall existingHall = GetHall(id);
+            Hall existingHall =await GetHallAsync(id);
 
             if (existingHall == null)
             {
@@ -114,7 +114,7 @@ namespace WebApplication.Repository
 
                 command.Parameters.AddWithValue("@id", id);
 
-                int rowsAffected = command.ExecuteNonQuery();
+                int rowsAffected = await command.ExecuteNonQueryAsync();
 
                 return rowsAffected;
             }
@@ -122,9 +122,9 @@ namespace WebApplication.Repository
         }
 
 
-        public int Delete(Guid id)
+        public async Task<int> DeleteAsync(Guid id)
         {
-            Hall hall = GetHall(id);
+            Hall hall =await  GetHallAsync(id);
 
             if (hall == null)
             {
@@ -139,7 +139,7 @@ namespace WebApplication.Repository
 
                 command.Parameters.AddWithValue("id", id);
 
-                int rowsAffected = command.ExecuteNonQuery();
+                int rowsAffected =await command.ExecuteNonQueryAsync();
 
                 return rowsAffected;
             }
@@ -147,7 +147,7 @@ namespace WebApplication.Repository
 
 
 
-        private Hall GetHall(Guid id)
+        private async Task<Hall> GetHallAsync(Guid id)
         {
             Hall hall = new Hall();
             try
@@ -158,7 +158,7 @@ namespace WebApplication.Repository
 
                     NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM hall WHERE id = @Id", connection);
                     command.Parameters.AddWithValue("Id", id);
-                    NpgsqlDataReader reader = command.ExecuteReader();
+                    NpgsqlDataReader reader = await command.ExecuteReaderAsync();
 
                     reader.Read();
                     hall.Id = (Guid)reader["Id"];

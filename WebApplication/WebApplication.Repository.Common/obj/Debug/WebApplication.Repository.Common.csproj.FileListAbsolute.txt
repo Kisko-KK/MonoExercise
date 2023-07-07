@@ -4,3 +4,14 @@ C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Repository.C
 C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Repository.Common\obj\Debug\WebApplication.Repository.Common.csproj.CoreCompileInputs.cache
 C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Repository.Common\obj\Debug\WebApplication.Repository.Common.dll
 C:\Users\marin\Documents\MonoExercise\WebApplication\WebApplication.Repository.Common\obj\Debug\WebApplication.Repository.Common.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\bin\Debug\WebApplication.Repository.Common.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\bin\Debug\WebApplication.Repository.Common.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\bin\Debug\WebApplication.Model.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\bin\Debug\WebApplication.Model.Common.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\bin\Debug\WebApplication.Model.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\bin\Debug\WebApplication.Model.Common.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\obj\Debug\WebApplication.Repository.Common.csproj.AssemblyReference.cache
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\obj\Debug\WebApplication.Repository.Common.csproj.CoreCompileInputs.cache
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\obj\Debug\WebApplication.Repository.Common.csproj.CopyComplete
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\obj\Debug\WebApplication.Repository.Common.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Repository.Common\obj\Debug\WebApplication.Repository.Common.pdb
