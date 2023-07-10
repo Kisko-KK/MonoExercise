@@ -208,6 +208,7 @@
     </Compile>
     <Compile Include="Models\UpdateHall.cs" />
     <Compile Include="Models\UpdateMovie.cs" />
+    <Compile Include="Models\ViewHall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -34,5 +34,10 @@ namespace WebApplication.Service
         {
             return await hallsRepository.DeleteAsync(id);
         }
+
+        public async Task<Hall> GetHallAsync(Guid id)
+        {
+            return await hallsRepository.GetHallAsync(id);
+        }
     }
 }

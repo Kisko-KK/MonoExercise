@@ -70,13 +70,6 @@ namespace WebApplication.Repository
 
         public async Task<int> PutAsync(Guid id, Hall hall)
         {
-            Hall existingHall =await GetHallAsync(id);
-
-            if (existingHall == null)
-            {
-                return -2; //doesnt exist
-            }
-
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
@@ -85,40 +78,38 @@ namespace WebApplication.Repository
                 NpgsqlCommand command = new NpgsqlCommand();
                 command.Connection = connection;
 
-                List<String> parameters = new List<String>();
-                if (String.IsNullOrEmpty(hall.Name) == false)
+                StringBuilder commandQueryBuilder = new StringBuilder("UPDATE Hall SET");
+
+                if (!string.IsNullOrEmpty(hall.Name))
                 {
-                    parameters.Add("Name = @name");
+                    commandQueryBuilder.Append(" Name = @name,");
                     command.Parameters.AddWithValue("@name", hall.Name);
                     hasParameters = true;
-                    hall.Name = hall.Name;
                 }
                 if (hall.NumOfSeats != null)
                 {
-                    parameters.Add("NumOfSeats = @numOfSeats");
+                    commandQueryBuilder.Append(" NumOfSeats = @numOfSeats,");
                     command.Parameters.AddWithValue("@numOfSeats", hall.NumOfSeats);
                     hasParameters = true;
-                    hall.NumOfSeats = hall.NumOfSeats.Value;
                 }
-
                 if (hasParameters)
                 {
-                    command.CommandText = $"UPDATE Hall SET " + String.Join(", ", parameters) + " WHERE Id = @id";
+                    // Remove the trailing comma
+                    commandQueryBuilder.Length -= 1;
+                    commandQueryBuilder.Append(" WHERE Id = @id");
                 }
                 else
                 {
-                    return -3; //no specified parameters
+                    return -3; // no specified parameters
                 }
 
-
-
+                command.CommandText = commandQueryBuilder.ToString();
                 command.Parameters.AddWithValue("@id", id);
 
                 int rowsAffected = await command.ExecuteNonQueryAsync();
 
                 return rowsAffected;
             }
-            
         }
 
 
@@ -147,7 +138,7 @@ namespace WebApplication.Repository
 
 
 
-        private async Task<Hall> GetHallAsync(Guid id)
+        public async Task<Hall> GetHallAsync(Guid id)
         {
             Hall hall = new Hall();
             try

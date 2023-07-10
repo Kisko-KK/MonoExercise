@@ -14,5 +14,6 @@ namespace WebApplication.Repository.Common
         Task<int> PostAsync(Hall hall);
         Task<int> PutAsync(Guid id, Hall hall);
         Task<int> DeleteAsync(Guid id);
+        Task<Hall> GetHallAsync(Guid id);
     }
 }

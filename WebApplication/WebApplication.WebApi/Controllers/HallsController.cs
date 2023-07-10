@@ -6,6 +6,8 @@ using WebApplication.Model;
 using WebApplication.Service;
 using WebApplication.WebApi.Models;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WebApplication.WebApi.Controllers
 {
@@ -16,7 +18,15 @@ namespace WebApplication.WebApi.Controllers
         // GET api/halls
         public async Task<HttpResponseMessage> Get()
         {
-            return Request.CreateResponse(HttpStatusCode.OK,await hallsService.GetAsync());
+            List<Hall> halls = await hallsService.GetAsync();
+            List<ViewHall> viewHalls = new List<ViewHall>();
+            halls.ForEach(hall =>
+            {
+                ViewHall viewHall = new ViewHall(hall.Id, hall.Name);
+                viewHalls.Add(viewHall);
+            });
+
+            return Request.CreateResponse(HttpStatusCode.OK, viewHalls);
         }
 
         // GET api/halls/5
@@ -28,7 +38,10 @@ namespace WebApplication.WebApi.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "There isn't any hall with that id!");
             }
-            return Request.CreateResponse(HttpStatusCode.OK, hall);
+
+            ViewHall viewHall = new ViewHall(hall.Id, hall.Name);
+
+            return Request.CreateResponse(HttpStatusCode.OK, viewHall);
         }
 
         // POST api/<controller>
@@ -52,15 +65,15 @@ namespace WebApplication.WebApi.Controllers
         // PUT api/<controller>/5
         public async Task<HttpResponseMessage> Put(Guid id, [FromBody] UpdateHall updatedHall)
         {
+            Hall existingHall = await hallsService.GetHallAsync(id);
+            if (existingHall == null)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Hall with this id doesn't exist!");
+            }
 
             Hall hall = new Hall(id, updatedHall.Name, (int)updatedHall.NumOfSeats);
 
             int rowsAffected = await hallsService.PutAsync(id, hall);
-
-            if (rowsAffected == -2)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Hall with this id doesn't exist!");
-            }
 
             if (rowsAffected == -3)
             {
