@@ -30,3 +30,9 @@ C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\o
 C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\obj\Debug\WebApplication.Common.csproj.CopyComplete
 C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\obj\Debug\WebApplication.Common.dll
 C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\obj\Debug\WebApplication.Common.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\bin\Debug\WebApplication.Model.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\bin\Debug\WebApplication.Model.Common.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\bin\Debug\WebApplication.Model.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\bin\Debug\WebApplication.Model.dll.config
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\bin\Debug\WebApplication.Model.Common.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.Common\bin\Debug\WebApplication.Model.Common.dll.config

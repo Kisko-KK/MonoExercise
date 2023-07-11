@@ -82,6 +82,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\WebApplication.Common\WebApplication.Common.csproj">
+      <Project>{01E47B0D-DE6F-47C6-B6FD-D138C7628244}</Project>
+      <Name>WebApplication.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WebApplication.Model\WebApplication.Model.csproj">
       <Project>{AB3AF401-E89D-408B-9D40-0041D3027F4D}</Project>
       <Name>WebApplication.Model</Name>

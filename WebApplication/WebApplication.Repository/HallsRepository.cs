@@ -16,28 +16,75 @@ namespace WebApplication.Repository
     {
         private string connectionString = ConnectionUtilities.ConnectionString;
 
-        public async Task<List<Hall>> GetAsync()
+        public async Task<PagingList<Hall>> GetAsync(Sorting sorting, Paging paging, HallFilter hallFilter)
         {
+            StringBuilder selectQueryBuilder = new StringBuilder();
+            StringBuilder countQueryBuilder = new StringBuilder();
+            StringBuilder filterQueryBuilder = new StringBuilder();
+
+            PagingList<Hall> pagingList = new PagingList<Hall>(paging.PageSize, paging.PageNumber);
+            int totalCount;
+
             List<Hall> halls = new List<Hall>();
             using (NpgsqlConnection connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();
 
-                NpgsqlCommand command = new NpgsqlCommand("SELECT * FROM hall", connection);
-                NpgsqlDataReader reader = await command.ExecuteReaderAsync();
+                string selectQuery = "SELECT * FROM hall ";
+                string countQuery = "SELECT COUNT(*) FROM hall";
+                string initialFilterCondition = " WHERE 1=1 ";
 
-                while (reader.Read())
+                selectQueryBuilder.Append(selectQuery);
+                selectQueryBuilder.Append(initialFilterCondition);
+
+                countQueryBuilder.Append(countQuery);
+                countQueryBuilder.Append(initialFilterCondition);
+
+                if (hallFilter.MaxSeats != null)
+                {
+                    filterQueryBuilder.Append($" AND numOfSeats < {hallFilter.MaxSeats}");
+                }
+                if (hallFilter.MinSeats != null)
+                {
+                    filterQueryBuilder.Append($" AND numOfSeats > {hallFilter.MinSeats}");
+                }
+                if (String.IsNullOrEmpty(hallFilter.Name) == false)
+                {
+                    filterQueryBuilder.Append($" AND name LIKE '{hallFilter.Name}%'");
+                }
+                    
+                string sortingQuery = $" ORDER BY {sorting.OrderBy} {sorting.SortOrder} ";
+                string pagingQuery = $" LIMIT {paging.PageSize} OFFSET {(paging.PageNumber - 1) * paging.PageSize}";
+
+                selectQueryBuilder.Append(filterQueryBuilder.ToString());
+                selectQueryBuilder.Append(sortingQuery);
+                selectQueryBuilder.Append(pagingQuery);
+
+
+                NpgsqlCommand selectCommand = new NpgsqlCommand(selectQueryBuilder.ToString(), connection);
+                NpgsqlDataReader selectReader = await selectCommand.ExecuteReaderAsync();
+
+
+                while (selectReader.Read())
                 {
                     Hall hall = new Hall();
-                    hall.Id = (Guid)reader["Id"];
-                    hall.Name = (string)reader["Name"];
-                    hall.NumOfSeats = (int)reader["NumOfSeats"];
+                    hall.Id = (Guid)selectReader["Id"];
+                    hall.Name = (string)selectReader["Name"];
+                    hall.NumOfSeats = (int)selectReader["NumOfSeats"];
                     halls.Add(hall);
                 }
-                reader.Close();
-            }
+                selectReader.Close();
 
-            return halls;
+                countQueryBuilder.Append(filterQueryBuilder.ToString());
+                NpgsqlCommand countCommand = new NpgsqlCommand(countQueryBuilder.ToString(), connection);
+                var countScalar = await countCommand.ExecuteScalarAsync();
+
+                totalCount = Convert.ToInt32(countScalar);
+            }
+            pagingList.Results = halls;
+            pagingList.TotalResultNumber = totalCount;
+
+            return pagingList;
         }
 
 
@@ -94,7 +141,6 @@ namespace WebApplication.Repository
                 }
                 if (hasParameters)
                 {
-                    // Remove the trailing comma
                     commandQueryBuilder.Length -= 1;
                     commandQueryBuilder.Append(" WHERE Id = @id");
                 }

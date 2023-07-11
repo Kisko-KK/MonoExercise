@@ -79,11 +79,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionUtilities.cs" />
+    <Compile Include="HallFilter.cs" />
+    <Compile Include="Paging.cs" />
+    <Compile Include="PagingList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sorting.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WebApplication.Model\WebApplication.Model.csproj">
+      <Project>{AB3AF401-E89D-408B-9D40-0041D3027F4D}</Project>
+      <Name>WebApplication.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

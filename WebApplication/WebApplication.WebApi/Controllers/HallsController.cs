@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
 using WebApplication.Service.Common;
+using WebApplication.Common;
 
 namespace WebApplication.WebApi.Controllers
 {
@@ -18,19 +19,22 @@ namespace WebApplication.WebApi.Controllers
         public HallsController(IHallService hallsService) {
             HallsService = hallsService;
         }
-
-        // GET api/halls
-        public async Task<HttpResponseMessage> Get()
+        
+        public async Task<HttpResponseMessage> Get(string orderBy = "Name", string sortOrder = "DESC", int pageSize = 2, int pageNumber = 1, int? minSeats = null, int? maxSeats = null, string name = "")
         {
-            List<Hall> halls = await HallsService.GetAsync();
+            Sorting sorting = new Sorting(orderBy, sortOrder);
+            Paging paging = new Paging(pageSize, pageNumber);
+            HallFilter hallFilter = new HallFilter(minSeats, maxSeats, name);
+
+            PagingList<Hall> pagingList = await HallsService.GetAsync(sorting, paging, hallFilter);
             List<ViewHall> viewHalls = new List<ViewHall>();
-            halls.ForEach(hall =>
+            pagingList.Results.ForEach(hall =>
             {
-                ViewHall viewHall = new ViewHall(hall.Id, hall.Name);
+                ViewHall viewHall = new ViewHall(hall.Id, hall.Name, (int)hall.NumOfSeats);
                 viewHalls.Add(viewHall);
             });
 
-            return Request.CreateResponse(HttpStatusCode.OK, viewHalls);
+            return Request.CreateResponse(HttpStatusCode.OK, pagingList);
         }
 
         // GET api/halls/5
@@ -43,7 +47,7 @@ namespace WebApplication.WebApi.Controllers
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "There isn't any hall with that id!");
             }
 
-            ViewHall viewHall = new ViewHall(hall.Id, hall.Name);
+            ViewHall viewHall = new ViewHall(hall.Id, hall.Name, (int)hall.NumOfSeats);
 
             return Request.CreateResponse(HttpStatusCode.OK, viewHall);
         }

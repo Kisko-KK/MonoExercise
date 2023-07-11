@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebApplication.Common;
 using WebApplication.Model;
 using WebApplication.Repository;
 using WebApplication.Repository.Common;
@@ -17,9 +18,9 @@ namespace WebApplication.Service
             HallsRepository = hallsRepository;   
         }
         
-        public async Task<List<Hall>> GetAsync()
+        public async Task<PagingList<Hall>> GetAsync(Sorting sorting, Paging paging, HallFilter hallFilter)
         {
-            return await HallsRepository.GetAsync();
+            return await HallsRepository.GetAsync(sorting, paging, hallFilter);
         }
 
         public async Task<Hall> GetAsync(Guid id) {
