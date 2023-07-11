@@ -335,3 +335,13 @@ C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\b
 C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Repository.dll.config
 C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Repository.Common.pdb
 C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Common.pdb
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\Autofac.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\Autofac.Integration.WebApi.dll
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Model.dll.config
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Repository.Common.dll.config
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Service.Common.dll.config
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Service.dll.config
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\Autofac.xml
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\Autofac.Integration.WebApi.xml
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Model.Common.dll.config
+C:\Users\marin\source\repos\Mono-practice\WebApplication\WebApplication.WebApi\bin\WebApplication.Common.dll.config

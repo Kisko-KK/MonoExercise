@@ -8,17 +8,21 @@ using WebApplication.WebApi.Models;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using WebApplication.Service.Common;
 
 namespace WebApplication.WebApi.Controllers
 {
     public class HallsController : ApiController
     {
-        private HallsService hallsService = new HallsService();
+        protected IHallService HallsService { get; set; }
+        public HallsController(IHallService hallsService) {
+            HallsService = hallsService;
+        }
 
         // GET api/halls
         public async Task<HttpResponseMessage> Get()
         {
-            List<Hall> halls = await hallsService.GetAsync();
+            List<Hall> halls = await HallsService.GetAsync();
             List<ViewHall> viewHalls = new List<ViewHall>();
             halls.ForEach(hall =>
             {
@@ -32,7 +36,7 @@ namespace WebApplication.WebApi.Controllers
         // GET api/halls/5
         public async Task<HttpResponseMessage> Get(Guid id)
         {
-            Hall hall = await hallsService.GetAsync(id);
+            Hall hall = await HallsService.GetAsync(id);
 
             if (hall == null)
             {
@@ -53,7 +57,7 @@ namespace WebApplication.WebApi.Controllers
             hall.Name = updatedHall.Name;
             hall.NumOfSeats = (int)updatedHall.NumOfSeats;
 
-            int rowsAffected = await hallsService.PostAsync(hall);
+            int rowsAffected = await HallsService.PostAsync(hall);
 
             if (rowsAffected <= 0)
             {
@@ -65,7 +69,7 @@ namespace WebApplication.WebApi.Controllers
         // PUT api/<controller>/5
         public async Task<HttpResponseMessage> Put(Guid id, [FromBody] UpdateHall updatedHall)
         {
-            Hall existingHall = await hallsService.GetHallAsync(id);
+            Hall existingHall = await HallsService.GetHallAsync(id);
             if (existingHall == null)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.NotFound, "Hall with this id doesn't exist!");
@@ -73,7 +77,7 @@ namespace WebApplication.WebApi.Controllers
 
             Hall hall = new Hall(id, updatedHall.Name, (int)updatedHall.NumOfSeats);
 
-            int rowsAffected = await hallsService.PutAsync(id, hall);
+            int rowsAffected = await HallsService.PutAsync(id, hall);
 
             if (rowsAffected == -3)
             {
@@ -90,7 +94,7 @@ namespace WebApplication.WebApi.Controllers
         // DELETE api/<controller>/5
         public async Task<HttpResponseMessage> Delete(Guid id)
         {
-            int rowsAffected = await hallsService.DeleteAsync(id);
+            int rowsAffected = await HallsService.DeleteAsync(id);
 
             if(rowsAffected == -2)
             {
