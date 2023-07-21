@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="C:\Users\marin\source\repos\Mono-practice\Students\Styles\style.css">
+
+  </head>
+  <body onload="populateEditedStudent()">
+    <main>
+        <nav>
+            <ul>
+              <li><a href="C:\Users\marin\source\repos\Mono-practice\Students\index.html">Home</a></li>
+              <li><a href="C:\Users\marin\source\repos\Mono-practice\Students\Pages\addNewStudent.html">New Student</a></li>
+            </ul>
+          </nav>
+
+
+        <h2>Edit student</h2>
+        <form id="studentEditForm">
+              <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            </div>
+            <div>
+              <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+
+            <div>
+                <select id="studyArea" name="studyArea" required>
+                  <option value="">Select a study area</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Mathematics">Mathematics</option>
+                  <option value="Economics">Economics</option>
+                  <option value="Tourism">Tourism</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Save">
+            </div>
+        </form>
+    </main>
+	<script src="C:\Users\marin\source\repos\Mono-practice\Students\Scripts\index.js"></script>
+  </body>
+</html>

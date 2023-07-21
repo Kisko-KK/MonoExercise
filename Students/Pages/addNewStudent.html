@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Home</title>
+    <link rel="stylesheet" href="C:\Users\marin\source\repos\Mono-practice\Students\Styles\style.css">
+    <script src="C:\Users\marin\source\repos\Mono-practice\Students\Scripts\index.js"></script>
+  </head>
+  <body>
+    <main>
+        <nav>
+            <ul>
+              <li><a href="C:\Users\marin\source\repos\Mono-practice\Students\index.html">Home</a></li>
+              <li class="active"><a href="#">New Student</a></li>
+            </ul>
+          </nav>
+
+
+        <h2>Add new student</h2>
+        <form id="studentForm">
+            <div>
+                <input type="text" id="id" name="id" placeholder="Id" required>
+              </div>
+            <div>
+              <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            </div>
+            <div>
+              <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            </div>
+
+            <div>
+                <select id="studyArea" name="studyArea" required>
+                  <option value="">Select a study area</option>
+                  <option value="Engineering">Engineering</option>
+                  <option value="Mathematics">Mathematics</option>
+                  <option value="Economics">Economics</option>
+                  <option value="Tourism">Tourism</option>
+                </select>
+            </div>
+
+            <div>
+                <input onclick="addStudent()" type="submit" value="Submit">
+            </div>
+        </form>
+    </main>
+  </body>
+</html>
